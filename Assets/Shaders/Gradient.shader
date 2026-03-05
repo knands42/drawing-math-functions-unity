@@ -1,4 +1,3 @@
-//Shader "Custom/NewUnlitUniversalRenderPipelineShader"
 Shader "Basics/BasicTexturing"
 {
     Properties
@@ -46,7 +45,6 @@ Shader "Basics/BasicTexturing"
             
             float4 frag(v2f i) : SV_TARGET
             {
-                float4 pos = i.positionCS;
                 float gradient = (i.positionWS.x + 1) * 0.5;
                 return float4(gradient, gradient * 0.5, 1 - gradient, 1 + gradient);
             }
