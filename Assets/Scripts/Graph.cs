@@ -8,22 +8,28 @@ public class Graph : MonoBehaviour
     [SerializeField, Range(10, 100)]
     public int resolution = 10;
 
-    [SerializeField, Range(0, 2)] 
-    public int function;
+    [SerializeField] 
+    public FunctionLib.FunctionName function;
     
-    private Transform[] points;
+    private Transform[] _points;
 
     private void Awake()
     {
         float step = 2f / resolution;
         var scale = Vector3.one * step;
         var position = Vector3.zero;
-        points = new Transform[resolution];
-        for (int i = 0; i < points.Length; i++)
+        _points = new Transform[resolution * resolution];
+        for (int i = 0, x = 0, z = 0; i < _points.Length; i++, x++)
         {
-            Transform point = points[i] = Instantiate(pointPrefab);
+            if (x == resolution)
+            {
+                x = 0;
+                z += 1;
+            }
+            Transform point = _points[i] = Instantiate(pointPrefab);
+            position.x = (x + 0.5f) * step - 1f;
+            position.z = (z + 0.5f) * step - 1f;
             
-            position.x = (i  * step - 1f);
             point.localPosition = position;
             point.localScale = scale;
             
@@ -33,23 +39,13 @@ public class Graph : MonoBehaviour
 
     private void Update()
     {
+        FunctionLib.Function fn = FunctionLib.GetFunction(function);
         float time = Time.time;
-        for (int i = 0; i < points.Length; i++)
+        for (int i = 0; i < _points.Length; i++)
         {
-            Transform point = points[i];
+            Transform point = _points[i];
             Vector3 position = point.localPosition;
-            if (function == 0)
-            {
-                position.y = FunctionLib.Wave(position.x, time);
-            }
-            else if (function == 1)
-            {
-                position.y = FunctionLib.MultiWave(position.x, time);
-            }
-            else
-            {
-                position.y = FunctionLib.Ripple(position.x, time);
-            }
+            position.y = fn(position.x, position.z, time);
             point.localPosition = position;
         }
     }
