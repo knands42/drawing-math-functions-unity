@@ -149,7 +149,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Graph
   pointPrefab: {fileID: 2941658115882120369, guid: 7f2194d71207f03afbb4e35b6f2e6ed4, type: 3}
-  resolution: 50
+  resolution: 100
   function: 2
 --- !u!4 &26355290
 Transform:
@@ -509,7 +509,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Graph
   pointPrefab: {fileID: 2941658115882120369, guid: 7f2194d71207f03afbb4e35b6f2e6ed4, type: 3}
-  resolution: 50
+  resolution: 100
   function: 1
 --- !u!4 &1363738815
 Transform:
