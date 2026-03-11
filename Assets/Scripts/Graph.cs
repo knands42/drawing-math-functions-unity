@@ -17,7 +17,6 @@ public class Graph : MonoBehaviour
     {
         float step = 2f / resolution;
         var scale = Vector3.one * step;
-        var position = Vector3.zero;
         _points = new Transform[resolution * resolution];
         for (int i = 0; i < _points.Length; i++)
         {
